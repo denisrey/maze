@@ -9,8 +9,8 @@ class Cell:
         self.examined = False
 
     def __str__(self):
-        return "x: {}, y: {}, walls: {}, visited: {}, target: {}"\
-            .format(self.x, self.y, self.walls, self.visited, self.target)
+        return "x: {}, y: {}, walls: {}, visited: {}, target: {}".format(self.x, self.y, self.walls, self.visited,
+                                                                         self.target)
 
 
 class Maze:

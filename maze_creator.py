@@ -43,3 +43,33 @@ class MazeCreatorDfs(AbstractMazeCreator):
     def _is_valid_target_cell(self, t_x, t_y):
         return 0 <= t_x < len(self.maze.map) and 0 <= t_y < len(self.maze.map) \
                and not self.maze.map[t_y][t_x].visited
+
+
+class MazeCreatorBlank(AbstractMazeCreator):
+
+    def __init__(self, maze: Maze):
+        self.maze = maze
+        self._create()
+
+    def _create(self):
+        # east and west borders:
+        for y in range(len(self.maze.map)):
+            self.maze.map[y][0].walls = {'N': False, 'E': False, 'S': False, 'W': True}
+            self.maze.map[y][len(self.maze.map) - 1].walls = {'N': False, 'E': True, 'S': False, 'W': False}
+
+        # north and south borders
+        for x in range(len(self.maze.map)):
+            self.maze.map[0][x].walls = {'N': True, 'E': False, 'S': False, 'W': False}
+            self.maze.map[len(self.maze.map) - 1][x].walls = {'N': False, 'E': False, 'S': True, 'W': False}
+
+        # middle:
+        for x in range(1, len(self.maze.map) - 1):
+            for y in range(1, len(self.maze.map) - 1):
+                self.maze.map[y][x].walls = {'N': False, 'E': False, 'S': False, 'W': False}
+
+        # fix corners:
+        self.maze.map[0][0].walls = {'N': True, 'E': False, 'S': False, 'W': True}
+        self.maze.map[len(self.maze.map) - 1][0].walls = {'N': False, 'E': False, 'S': True, 'W': True}
+        self.maze.map[0][len(self.maze.map) - 1].walls = {'N': True, 'E': True, 'S': False, 'W': False}
+        self.maze.map[len(self.maze.map) - 1][len(self.maze.map) - 1].walls = {'N': False, 'E': True, 'S': True,
+                                                                               'W': False}
