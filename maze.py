@@ -6,6 +6,7 @@ class Cell:
         self.walls = {'N': True, 'E': True, 'S': True, 'W': True}
         self.visited = False
         self.target = False
+        self.examined = False
 
     def __str__(self):
         return "x: {}, y: {}, walls: {}, visited: {}, target: {}"\
